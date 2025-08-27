@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一側足場アシスタント</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>一側足場アシスタント</h1>
+        <p>必要な足場の情報を入力してください。複数の足場を追加できます。</p>
+        
+        <div id="scaffolding-forms">
+            <div class="scaffolding-form">
+                <button class="remove-btn">削除</button>
+                <div class="input-group">
+                    <label for="length-0">足場の長さ</label>
+                    <div class="input-unit-toggle">
+                        <input type="number" id="length-0" class="length-input" step="0.5" placeholder="例: 5.4">
+                        <select class="unit-select">
+                            <option value="meter">m</option>
+                            <option value="ken">間</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="height-0">足場の高さ (m)</label>
+                    <input type="number" id="height-0" class="height-input" step="0.5" placeholder="例: 8.0">
+                </div>
+                <div class="input-group">
+                    <label>設置場所</label>
+                    <div class="radio-group">
+                        <input type="radio" id="location-concrete-0" name="location-0" value="concrete" checked>
+                        <label for="location-concrete-0">コンクリート</label>
+                        <input type="radio" id="location-soil-0" name="location-0" value="soil">
+                        <label for="location-soil-0">土の地面</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="add-scaffolding">足場を追加</button>
+        <button id="calculate-btn">計算</button>
+
+        <div id="results">
+            <h2>合計必要資材数</h2>
+            <div id="total-results"></div>
+            <div id="pipe-combinations-details" style="display: none;">
+                <h3>単管パイプの組み合わせ詳細</h3>
+                <div id="combination-details-list"></div>
+            </div>
+            <h3>完成する足場の総間数</h3>
+            <div id="total-ken"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
