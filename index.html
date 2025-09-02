@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単管パイプ足場資材計算アプリ</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ▼ PWA用の追記 ▼ -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6B8E23"> <!-- ステータスバー色 -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon.png">
+    <!-- ▲ PWA用の追記 ▲ -->
+</head>
+<body>
+    <div class="container">
+        <h1>単管パイプ足場資材計算</h1>
+
+        <div class="mode-toggle">
+            <button id="simple-mode-btn" class="active">シンプルモード</button>
+            <button id="custom-mode-btn">カスタムモード</button>
+        </div>
+
+        <div id="simple-form-container">
+            <h2>足場の基本情報</h2>
+            <div id="scaffolding-forms">
+                <div class="scaffolding-form" data-form-id="1">
+                    <div class="input-group">
+                        <label for="length-1">足場の長さ</label>
+                        <div class="input-unit-toggle">
+                            <input type="number" id="length-1" class="length-input" step="0.5" placeholder="例: 5.4">
+                            <select class="unit-select">
+                                <option value="meter">m</option>
+                                <option value="ken">間</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="height-1">足場の高さ (m)</label>
+                        <input type="number" id="height-1" class="height-input" step="0.5" placeholder="例: 8.0">
+                    </div>
+                    <div class="input-group">
+                        <label>設置場所</label>
+                        <div class="radio-group">
+                            <input type="radio" id="location-concrete-1" name="location-1" value="concrete" checked>
+                            <label for="location-concrete-1">コンクリート</label>
+                            <input type="radio" id="location-soil-1" name="location-1" value="soil">
+                            <label for="location-soil-1">土の地面</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="add-scaffolding">足場を追加</button>
+        </div>
+
+        <div id="custom-form-container" style="display: none;">
+            <h2>カスタム足場情報</h2>
+            <p>セクションごとに長さと高さを指定して、複雑な形状の足場を作成できます。</p>
+            <div id="custom-scaffolding-forms"></div>
+            <button id="add-custom-section">セクションを追加</button>
+        </div>
+
+        <button id="calculate-btn">必要資材数を計算</button>
+
+        <div class="results-section">
+            <h2>計算結果</h2>
+            <div class="total-ken">
+                <h4>総間数</h4>
+                <p id="total-ken"></p>
+            </div>
+            <div id="total-results"></div>
+            <div id="pipe-combinations-details" style="display: none;">
+                <h3>単管パイプの組み合わせ詳細</h3>
+                <ul id="combination-details-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- ▼ PWA用 service worker 登録 ▼ -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then(() => console.log('Service Worker registered'))
+          .catch(err => console.log('SW registration failed:', err));
+      }
+    </script>
+    <!-- ▲ PWA用 service worker 登録 ▲ -->
+
+</body>
+</html>
